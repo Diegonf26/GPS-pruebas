@@ -22,20 +22,12 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements LocationListener {
     //protected LocationManager locationManager;
-    EditText userNumberInput;
-    EditText userTextInput;
-    TextView distanceText;
-    TextView latitude;
-    TextView longitude;
+
     double lat_inicial, lon_inicial, lat_actual, lon_actual, lat_ant, lon_ant;
     float dist = 0;
     float[] result;
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 0; // in Meters
-    private static final long MIN_TIME_BW_UPDATES = 0;
-    boolean ang_inicial = false;
-    private static final int lim_acondi_gps=3;
-    int acod_gps=0;
-
+    private static final long MIN_TIME_BW_UPDATES = 300;
 
     Button btComenzar;
     TextView tvUbicacion;
@@ -50,7 +42,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
     private LocationManager locationManager;
     private Location location;
-    private final int REQUEST_LOCATION = 200;
 
     private boolean iniciar_carrera=false;
 
@@ -108,8 +99,14 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         btComenzar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (acod_gps >= lim_acondi_gps)
+                if (iniciar_carrera==false) {
                     iniciar_carrera = true;
+                    btComenzar.setText("Finalizar");
+                }
+                else {
+                    iniciar_carrera = false;
+                    btComenzar.setText("Comenzar");
+                }
             }
         });
 
@@ -134,58 +131,27 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         else
             etHasBearing.setText("Estatico");
 
-        //acod_gps++;
-        //tvAcond.setText(acod_gps);
-
         etLatitud.setText(" "+location.getLatitude());
         etLongitud.setText(" "+location.getLongitude());
 
-        lat_actual = location.getLatitude();
-        lon_actual = location.getLongitude();
+        if(iniciar_carrera==true) {
+            lat_actual = location.getLatitude();
+            lon_actual = location.getLongitude();
 
-        float[] results = new float[1];
-        Location.distanceBetween(lat_ant, lon_ant, lat_actual, lon_actual, results);
-        etLocation.setText(" "+results[0]);
-        //dist = dist + results[0];
+            float[] results = new float[1];
+            Location.distanceBetween(lat_ant, lon_ant, lat_actual, lon_actual, results);
+            etLocation.setText(" "+results[0]);
 
-        lat_ant = lat_actual;
-        lon_ant = lon_actual;
-
-        /*if (acod_gps<lim_acondi_gps) {
-            Log.i("GPS","Acondecimiento GPS");
-            etLatitud.setText(" "+location.getLatitude());
-            etLongitud.setText(" "+location.getLongitude());
-            acod_gps++;
-            tvAcond.setText(acod_gps);
-        }
-        else if (acod_gps>=lim_acondi_gps && iniciar_carrera==true){
-            tvUbicacion.setText(""+location.getLatitude()+" "+location.getLongitude());
-            Log.i("GPS","Nuevo valor GPS");
-
-            if (location.hasBearing()==true && location.getAccuracy()<4){
-                if(ang_inicial==false){
-                    lat_inicial=location.getLatitude();
-                    lon_inicial=location.getLongitude();
-                    lat_ant=lat_inicial;
-                    lon_ant=lon_inicial;
-                    etLatitud.setText(" "+lat_inicial);
-                    etLongitud.setText(" "+lon_inicial);
-                    ang_inicial=true;
-                }
-                else {
-                    lat_actual = location.getLatitude();
-                    lon_actual = location.getLongitude();
-                    float[] results = new float[1];
-                    Location.distanceBetween(lat_ant, lon_ant, lat_actual, lon_actual, results);
-                    etLocation.setText(" "+results[0]);
-                    dist = dist + results[0];
-
-                    lat_ant = lat_actual;
-                    lon_ant = lon_actual;
-                }
+            if (location.getAccuracy()<=5 && results[0]<=10){
+                Location.distanceBetween(lat_ant, lon_ant, lat_actual, lon_actual, results);
+                etLocation.setText(" "+results[0]);
+                dist = dist + results[0];
+                etDistancia.setText(String.format("%1$s [m]", dist));
             }
-            etDistancia.setText(String.format("%1$s [m]", dist));
-        }*/
+
+            lat_ant = lat_actual;
+            lon_ant = lon_actual;
+        }
     }
 
     @Override
