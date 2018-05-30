@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvUbicacion"
+        android:layout_width="wrap_content"
+        android:layout_height="21dp"
+        android:text="Hello World! 2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btComenzar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Comenzar"
+        tools:layout_editor_absoluteX="143dp"
+        tools:layout_editor_absoluteY="151dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvUbi_inicial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="La ubicacion actual es:" />
+
+        <EditText
+            android:id="@+id/etLatitud"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:editable="false"
+            android:text=" Latitud " />
+
+        <EditText
+            android:id="@+id/etLongitud"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:editable="false"
+            android:text=" Longitud " />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvDistancia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="La distancia recorrida es:" />
+
+        <EditText
+            android:id="@+id/etDistancia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:editable="false"
+            android:text=" Distancia " />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvlocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Distancia de paso:" />
+
+        <EditText
+            android:id="@+id/etLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:editable="false"
+            android:text=" Saltos de cada paso " />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Precision GPS:" />
+
+        <EditText
+            android:id="@+id/etPrescGPS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:editable="false"
+            android:text=" [m] " />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bearing (movimiento):" />
+
+        <EditText
+            android:id="@+id/etHasBearing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:editable="false"
+            android:text=" true/false " />
+
+    </LinearLayout>
+    <TextView
+        android:id="@+id/tvAcond"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Acondicionamiento" />
+
+</LinearLayout>
